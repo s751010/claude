@@ -1,0 +1,92 @@
+@import "tailwindcss";
+
+/*
+ * الأساس البصري للوحة التحكم.
+ * ملاحظة: ثيمات المنيو العام (راشد) **لا تُعرَّف هنا** — هي رموز في
+ * `src/config/themes.ts` تُحقَن كمتغيرات CSS على مستوى الصفحة في المرحلة 4.
+ */
+
+:root {
+  /* واجهة اللوحة — محايدة عمداً حتى لا تنافس ثيمات المنيو */
+  --cm-app-bg: #ffffff;
+  --cm-app-surface: #f7f7f8;
+  --cm-app-border: #e4e4e7;
+  --cm-app-text: #18181b;
+  --cm-app-text-muted: #71717a;
+  --cm-app-accent: #18181b;
+  --cm-app-accent-text: #ffffff;
+
+  /* حالات مشتركة */
+  --cm-success: #15803d;
+  --cm-danger: #b91c1c;
+  --cm-warning: #a16207;
+
+  /* أهداف اللمس على الجوال — الحد الأدنى الموصى به */
+  --cm-tap-target: 44px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --cm-app-bg: #0c0c0d;
+    --cm-app-surface: #18181b;
+    --cm-app-border: #27272a;
+    --cm-app-text: #fafafa;
+    --cm-app-text-muted: #a1a1aa;
+    --cm-app-accent: #fafafa;
+    --cm-app-accent-text: #18181b;
+
+    --cm-success: #4ade80;
+    --cm-danger: #f87171;
+    --cm-warning: #facc15;
+  }
+}
+
+@theme inline {
+  --color-app-bg: var(--cm-app-bg);
+  --color-app-surface: var(--cm-app-surface);
+  --color-app-border: var(--cm-app-border);
+  --color-app-text: var(--cm-app-text);
+  --color-app-muted: var(--cm-app-text-muted);
+  --color-app-accent: var(--cm-app-accent);
+  --color-app-accent-text: var(--cm-app-accent-text);
+
+  --color-success: var(--cm-success);
+  --color-danger: var(--cm-danger);
+  --color-warning: var(--cm-warning);
+
+  --font-sans: var(--font-app);
+}
+
+html {
+  /* الأرقام العربية الشرقية غير مطلوبة — نبقي الأرقام اللاتينية للأسعار */
+  font-variant-numeric: tabular-nums;
+}
+
+body {
+  background: var(--cm-app-bg);
+  color: var(--cm-app-text);
+  font-family: var(--font-app), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/*
+ * تركيز لوحة مفاتيح مرئي — شرط في الحد الأدنى للجودة (CLAUDE.md القسم 7).
+ * لا تُزال هذه القاعدة ولا تُستبدل بـ outline: none.
+ */
+:focus-visible {
+  outline: 2px solid var(--cm-app-accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* احترام تفضيل تقليل الحركة — شرط في القسم 7 */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
